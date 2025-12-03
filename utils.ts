@@ -207,6 +207,8 @@ const weiboUtils = {
         // 处理图片的链接
         htmlNewLineUnreplaced = htmlNewLineUnreplaced.replaceAll(/<a\s+href="https?:\/\/[^"]+\.(jpg|png|gif)"/g, (match) => `${match} data-rsshub-image="href"`);
 
+
+//【这里】
         htmlNewLineUnreplaced += '<br>';
 
         let html = htmlNewLineUnreplaced.replaceAll('\n', '<br>');
@@ -272,6 +274,8 @@ const weiboUtils = {
                 }
 
                 let style = '';
+
+//【这里】
                 html += '<br><img ';
                 html += readable ? 'vspace="8" hspace="4"' : '';
                 if (item.large) {
@@ -326,15 +330,19 @@ const weiboUtils = {
                 html += `<br><small>原博：<a href="https://weibo.com/${status.retweeted_status.user.id}/${status.retweeted_status.bid}" target="_blank" rel="noopener noreferrer">https://weibo.com/${status.retweeted_status.user.id}/${status.retweeted_status.bid}</a></small>`;
             }
             if (showTimestampInDescription) {
+
+//【这里】
                 html += `<br><small>` + new Date(status.retweeted_status.created_at).toLocaleString() + `</small><br>`;
             }
             if (readable) {
                 html += `<br clear="both" /><div style="clear: both"></div>`;
             }
-
+//【这里】
             html += '';
         }
 
+//【这里】
+        html = html.replace(/<a  href="(.*?)" data-hide=""><br>(查看图片|评论配图)<\/a>/g,'<a href="$1"> 评论配图 </a><br><br><img src="$1" referrerpolicy="no-referrer" width="400">');
         html = html.replace(/<a (.*?)>/g, '<a $1 style="color:#09f!important;text-decoration:none!important;">');
 
         if (showAuthorInDesc && showAuthorAvatarInDesc) {
@@ -393,6 +401,8 @@ const weiboUtils = {
         let anyVideo = false;
         if (livePhotos) {
             for (const livePhoto of livePhotos) {
+
+//【这里】
                 video += `<br><br><video controls="controls" poster="${(livePhoto.large && livePhoto.large.url) || livePhoto.url}" src="${livePhoto.videoSrc}" style="width: 100%"></video><br>`;
                 anyVideo = true;
             }
@@ -428,6 +438,8 @@ const weiboUtils = {
                 if (pageUrl) {
                     video += `<p>视频无法显示，请前往<a href="${pageUrl}" target="_blank" rel="noopener noreferrer">微博视频</a>观看。</p>`;
                 }
+
+//【这里】
                 video += '</video><br>';
                 anyVideo = true;
             }
