@@ -252,7 +252,8 @@ const weiboUtils = {
 
         // drop live photo
         const livePhotoCount = status.pics ? status.pics.filter((pic) => pic.type === 'livephoto').length : 0;
-        const pics = status.pics && status.pics.filter((pic) => pic.type !== 'livephoto');
+        const pics = status.pics || [];
+//        const pics = status.pics && status.pics.filter((pic) => pic.type !== 'livephoto');
 
         // 添加微博配图
         if (pics) {
@@ -342,7 +343,7 @@ const weiboUtils = {
         }
 
 //【这里】
-        html = html.replace(/<a  href="(.*?)" data-hide=""><br>(查看图片|评论配图)<\/a>/g,'<a href="$1"> 评论配图 </a><br><br><img src="$1" referrerpolicy="no-referrer" width="400">');
+        html = html.replace(/<a[^>]*href="([^"]+)"[^>]*data-hide=""[^>]*>(查看图片|评论配图)<\/a>/g,'<a href="$1">评论配图</a><br><img src="$1" referrerpolicy="no-referrer">');
         html = html.replace(/<a (.*?)>/g, '<a $1 style="color:#09f!important;text-decoration:none!important;">');
 
         if (showAuthorInDesc && showAuthorAvatarInDesc) {
