@@ -344,7 +344,7 @@ const weiboUtils = {
 
 //【这里】
         html = html.replace(/<a[^>]*href="([^"]+)"[^>]*data-hide=""[^>]*>(查看图片|评论配图)<\/a>/g,'<a href="$1">评论配图</a><br><br><img src="$1" referrerpolicy="no-referrer">');
-        html = html.replace(/<br><br> - 转发 <a href=/g, '<br> - 转发 <a href=');
+        //html = html.replace(/<br><br> - 转发 <a href=/g, '<br> - 转发 <a href=');
         html = html.replace(/<a (.*?)>/g, '<a $1 style="color:#09f!important;text-decoration:none!important;">');
 
         if (showAuthorInDesc && showAuthorAvatarInDesc) {
