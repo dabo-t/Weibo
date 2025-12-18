@@ -198,8 +198,8 @@ const weiboUtils = {
         // 将行内图标的高度设置为一行，改善阅读体验。但有些阅读器删除了 style 属性，无法生效  // 不需要，微博已经作此设置
         // htmlNewLineUnreplaced = htmlNewLineUnreplaced.replace(/(?<=<span class=["']?url-icon["']?>)<img/g, '<img style="height: 1em"');
         // 去掉全文
-        htmlNewLineUnreplaced = htmlNewLineUnreplaced.replaceAll('全文<br>', '<br>');
-        htmlNewLineUnreplaced = htmlNewLineUnreplaced.replaceAll(/<a href="(.*?)">全文<\/a>/g, '');
+        //htmlNewLineUnreplaced = htmlNewLineUnreplaced.replaceAll('全文<br>', '<br>');
+        //htmlNewLineUnreplaced = htmlNewLineUnreplaced.replaceAll(/<a href="(.*?)">全文<\/a>/g, '');
 
         // 处理外部链接
         htmlNewLineUnreplaced = htmlNewLineUnreplaced.replaceAll(/"https:\/\/weibo\.cn\/sinaurl.*?[&?]u=(http.*?)"/g, (match, p1) => `"${decodeURIComponent(p1)}"`);
@@ -343,7 +343,8 @@ const weiboUtils = {
         }
 
 //【这里】
-        html = html.replace(/<a[^>]*href="([^"]+)"[^>]*data-hide=""[^>]*>(查看图片|评论配图)<\/a>/g,'<a href="$1">评论配图</a><br><img src="$1" referrerpolicy="no-referrer">');
+        html = html.replace(/<a[^>]*href="([^"]+)"[^>]*data-hide=""[^>]*>(查看图片|评论配图)<\/a>/g,'<a href="$1">评论配图</a><br><br><img src="$1" referrerpolicy="no-referrer">');
+        html = html.replace(/<br><br> - 转发 <a href=/g, '<br> - 转发 <a href=');
         html = html.replace(/<a (.*?)>/g, '<a $1 style="color:#09f!important;text-decoration:none!important;">');
 
         if (showAuthorInDesc && showAuthorAvatarInDesc) {
